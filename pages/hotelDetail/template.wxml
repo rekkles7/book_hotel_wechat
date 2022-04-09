@@ -15,6 +15,7 @@
                </view>
           </view>
 
-          <view class='bookBtn' hover-class='bookBtnHover' bindtap='{{bookTap}}' data-index='{{index}}'>预订</view>
+          <view wx:if="{{roomNumber > 0}}" class='bookBtn' hover-class='bookBtnHover' bindtap='{{bookTap}}' data-index='{{index}}'>预订</view>
+          <view wx:else class='bookBtnFull' data-index='{{index}}' >满房</view>
      </view>
 </template>

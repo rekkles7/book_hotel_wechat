@@ -7,7 +7,10 @@
     "pages/searchHotel/searchHotel",
     "pages/hotelDetail/hotelDetail",
     "pages/hotelFilter/hotelFilter",
-    "pages/bookHotel/bookHotel"
+    "pages/bookHotel/bookHotel",
+    "pages/payOrder",
+    "pages/payOrder/payOrder",
+    "pages/orderDetail/orderDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

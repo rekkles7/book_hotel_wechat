@@ -1,0 +1,53 @@
+/* pages/payOrder/payOrder.wxss */
+.bookMsg {
+  margin: 24rpx;
+  display: flex;
+  flex-direction: column;
+  padding: 36rpx;
+  border-radius: 20rpx;
+  box-shadow: 0rpx 6rpx 20rpx #ccc;
+  background: white;
+}
+
+.payWay {
+  margin: 24rpx;
+  display: flex;
+  flex-direction: column;
+  padding: 36rpx;
+  border-radius: 20rpx;
+  box-shadow: 0rpx 6rpx 20rpx #ccc;
+  background: white;
+}
+
+.payItem {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: white;
+  border-top: 1rpx solid #ee6715;
+  font-size: 32rpx;
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.payItem .priceItem {
+  flex: 1;
+  color: #ee6715;
+  padding-left: 24rpx;
+}
+
+.payItem .payBtn {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  width: 250rpx;
+  background: #ee6715;
+}

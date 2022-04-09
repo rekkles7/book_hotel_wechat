@@ -1,0 +1,96 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<view class='bookMsg' wx:if="{{orderStatus==2}}">
+  <view style="font-weight: 800;">预定成功，期待您的入住</view>
+  <view style="color: rgb(205,204,205);font-size: 13px;margin-top: 8px;">订单已支付</view>
+  <view style="margin-top: 10px;">
+    <view style="font-size: 14px;margin-top: 10px;display: inline;">今天12点前可以免费取消</view>
+    <view style="font-size: 12px;display: inline;float: right;color: rgb(240, 127, 124);" bindtap="cancelRules">取消规则</view>
+    <!--屏幕背景变暗的背景  -->
+  <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+  <!--弹出框  -->
+  <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+    <view style="font-weight: 800;text-align: center;">订房必读</view>
+    <view style="font-weight: 800;font-size: 15px;margin-left: 20px;">取消规则</view>
+    <view style="font-size: 15px;margin-left: 20px;margin-top: 10px;"><text decode="{[true}}" style="color: rgb(247, 202, 78);">入住前十天17:00前&nbsp;&nbsp;&nbsp;免费取消</text></view>
+    <view style="font-size: 15px;margin-left: 20px;margin-top: 10px;"><text decode="{[true}}" style="color: red;">入住当天18:00前&nbsp;&nbsp;&nbsp;扣除房费10%</text></view>
+    <view style="font-size: 15px;margin-left: 20px;margin-top: 10px;"><text decode="{[true}}">入住当天18:00后&nbsp;&nbsp;&nbsp;不可取消</text></view>
+  </view>
+  </view>
+  <view style="margin-top: 10px;">
+    <view style="width: 30%;display: inline-block;">
+      <button style="background-color: #fd7a33;font-size: 14px;color: white;">取消订单</button>
+    </view>
+    <view style="width: 30%;display: inline-block;margin-left: 14px;margin-right: 14px;">
+      <button style="background-color: #fd7a33;font-size: 14px;color: white;">修改订单</button>
+    </view>
+    <view style="width: 30%;display: inline-block;">
+      <button style="background-color: #fd7a33;font-size: 14px;color: white;">再次预定</button>
+    </view>
+  </view>
+</view>
+<view class="bookMsg" wx:if="{{orderStatus==0}}">
+  <view style="font-weight: 800;">等待付款</view>
+  <view style="color: rgb(205,204,205);font-size: 13px;margin-top: 8px;">该订单需要在30:00前支付，超时将自动关闭</view>
+  <view style="font-size: 14px;margin-top: 10px;display: inline;">{{startOfDate}} 12点前可以免费取消</view>
+  <view style="margin-top: 10px;">
+    <view style="width: 30%;display: inline-block;">
+      <button style="background-color: #fd7a33;font-size: 14px;color: white;" bindtap="payOrder" data-orderprice="{{orderPrice}}" data-roomname="{{roomName}}" data-startdate="{{startOfDate}}" data-orderid="{{orderId}}">去付款</button>
+    </view>
+    <view style="width: 30%;display: inline-block;margin-left: 14px;margin-right: 14px;">
+      <button style="background-color: #fd7a33;font-size: 14px;color: white;">修改订单</button>
+    </view>
+    <view style="width: 30%;display: inline-block;">
+      <button style="background-color: #fd7a33;font-size: 14px;color: white;">取消订单</button>
+    </view>
+  </view>
+</view>
+<!-- 不需要写 -->
+<view class="bookMsg" wx:if="{{orderStatus==3}}">
+  <view style="font-weight: 800;">已消费</view>
+  <view style="color: rgb(205,204,205);font-size: 13px;margin-top: 8px;">您的订单已消费，期待您再次预订</view>
+</view>
+<view class="bookMsg" wx:if="{{orderStatus==4}}">
+  <view style="font-weight: 800;">已取消</view>
+  <view style="color: rgb(205,204,205);font-size: 13px;margin-top: 8px;">您的订单已取消，期待您下次光临</view>
+</view>
+
+<view class="bookMsg" wx:if="{{orderStatus==1}}">
+  <view style="font-weight: 800;">待酒店前台确认</view>
+  <view style="color: rgb(205,204,205);font-size: 13px;margin-top: 8px;">您的订单已提交至后台，请耐心等待后台人员确认</view>
+  <view style="color: rgb(205,204,205);font-size: 13px;margin-top: 8px;">该订单需要在30:00内确认，超时将自动关闭</view>
+</view>
+
+<view class="bookMsg">
+  <view>
+    <view style="font-size: 16px;display: inline-block;">在线支付 <view style="color: #fd7a33;display: inline-block;">¥{{orderPrice}}.00</view></view>
+  </view>
+</view>
+
+<view class="bookMsg">
+  <view style="font-weight: 800;">入住信息</view>
+  <view style="font-weight: 800;margin-top: 6px;">
+    <image src="../../res/images/酒店.png" style="height: 17px;width: 17px;vertical-align: middle;"></image>
+    {{hotelName}}
+  </view>
+  <view class="divLine"></view>
+  <view style="margin-top: 10px;">
+    <view>{{roomName}} {{roomNumber}}间</view>
+    <view style="margin-top: 6px;">{{roomService}}</view>
+    <view style="margin-top: 6px;"><text decode="{{true}}">{{startOfDate}} <text style="color: rgb(205, 204, 205);">入住</text>&nbsp;&nbsp;&nbsp;&nbsp;{{endOfDate}} <text style="color: rgb(205, 204, 205);">离店</text></text></view>
+  </view>
+  <view style="margin-top: 6px;">
+    <text decode="{{true}}" style="display: block;"><text style="color: rgb(205, 204, 205);">入住人</text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{orderUserName}}</text>
+    <text decode="{{true}}" style="display: block;margin-top: 6px;"><text style="color: rgb(205, 204, 205);">联系电话</text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{orderUserTelephone}}</text>
+    <text decode="{{true}}" style="display: block;margin-top: 6px;"><text style="color: rgb(205, 204, 205);">预计到店</text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{startOfDate}} 13:00前</text>
+  </view>
+</view>
+
+<view class="bookMsg">
+  <view style="font-weight: 800;">订单信息</view>
+  <view style="margin-top: 6px;">
+    <text style="display: block;"><text decode="{[true}}" style="color: rgb(205, 204, 205);">订单号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>{{orderId}}</text>
+    <text style="display: block;"><text decode="{[true}}" style="color: rgb(205, 204, 205);">下单时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>{{orderCreateTime}}</text>
+    <text style="display: block;"><text decode="{[true}}" style="color: rgb(205, 204, 205);">付款时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>{{orderPayTime}}</text>
+    <text style="display: block;"><text decode="{[true}}" style="color: rgb(205, 204, 205);">付款方式&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>微信支付</text>
+  </view>
+</view>

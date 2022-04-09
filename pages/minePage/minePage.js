@@ -31,7 +31,7 @@ Page({
                          success: function(res) {
                               // 2. 小程序通过wx.request()发送code到开发者服务器
                               wx.request({
-                                   url: 'http://localhost:8080/user/wx/login',
+                                   url: 'http://localhost:8000/user/wx/login',
                                    method: 'POST',
                                    header: {
                                         'content-type': 'application/x-www-form-urlencoded'
@@ -156,15 +156,37 @@ Page({
      // },
 
      allOrderTap: function () {
-          wx.navigateTo({
-               url: '../orderList/orderList?type=all',
-          })
+          var open_id = wx.getStorageSync('open_id');
+          if(open_id == null || open_id == undefined || open_id == ""){
+               wx.showToast({
+                    title: "请先登录", // 提示的内容
+                    icon: "error", // 图标，默认success
+                    image: "", // 自定义图标的本地路径，image 的优先级高于 icon
+                    duration: 3000, // 提示的延迟时间，默认1500
+                    mask: false, // 是否显示透明蒙层，防止触摸穿透
+                })
+          }else{
+               wx.navigateTo({
+                    url: '../orderList/orderList?type=all',
+               })
+          }
      },
 
      todoOrderTap: function () {
-          wx.navigateTo({
-               url: '../orderList/orderList?type=todo',
-          })
+          var open_id = wx.getStorageSync('open_id');
+          if(open_id == null || open_id == undefined || open_id == ""){
+               wx.showToast({
+                    title: "请先登录", // 提示的内容
+                    icon: "error", // 图标，默认success
+                    image: "", // 自定义图标的本地路径，image 的优先级高于 icon
+                    duration: 3000, // 提示的延迟时间，默认1500
+                    mask: false, // 是否显示透明蒙层，防止触摸穿透
+                })
+          }else{
+               wx.navigateTo({
+                    url: '../orderList/orderList?type=todo',
+               })
+          }
      },
 
      /**

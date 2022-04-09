@@ -6,9 +6,6 @@ Page({
       * 页面的初始数据
       */
      data: {
-          // stateList: [
-          //      "全部", "待入住", "已入住", "已取消"
-          // ],
           stateList: [
                "全部", "待支付","待入住", "已入住", "已取消"
           ],
@@ -45,36 +42,57 @@ Page({
       * 生命周期函数--监听页面加载
       */
      onLoad: function (options) {
-          wx.getStorage({
-               key: 'open_id',
-               success:(res) =>{
-                    this.setData({
-                         open_id: res.data
-                    })
-               }
-          });
-          console.log(options);
+          this.data.open_id = wx.getStorageSync('open_id')
           var pageType = options.type;
           if (pageType == 'all') {
                this.setData({
                     selectedIndex: 0,
+                    orderAll: null
                });
+               var that = this;
+               var open_id = this.data.open_id;
+               wx: setTimeout(function () {
+                    wx.request({
+                      url: 'http://127.0.0.1:8000/user/order/selectAllOrderByUserId',
+                      data:{
+                           userId: open_id
+                      },
+                      header: {
+                         'content-type': 'application/json' // 默认值
+                      },
+                      success(res){
+                         that.setData({
+                              orderAll: res.data.data,
+                         });
+                         console.log(that.data.orderAll)
+                      }
+                    })
+               }, 2000);
           } else if (pageType == 'todo') {
                this.setData({
                     selectedIndex: 2,
+                    orderTodo: null
                });
+               var that = this;
+               var open_id = this.data.open_id;
+               wx: setTimeout(function () {
+                    wx.request({
+                      url: 'http://127.0.0.1:8000/user/order/selectToPayOrderByUserIdAndSelectedIndex',
+                      data:{
+                           userId: open_id,
+                           selectedIndex: that.data.selectedIndex
+                      },
+                      header: {
+                         'content-type': 'application/json' // 默认值
+                      },
+                      success(res){
+                         that.setData({
+                              orderToDo: res.data.data,
+                         });
+                      }
+                    })
+               }, 2000);
           }
-
-          var that = this;
-          wx: setTimeout(function () {
-               that.setData({
-                    orderAll: [],
-                    orderToPay: [],
-                    orderTodo: [],
-                    orderDone: [],
-                    orderCancel: [],
-               });
-          }, 2000);
      },
 
      swiperChange: function (e) {
@@ -102,7 +120,7 @@ Page({
                     });
                     wx: setTimeout(function () {
                          wx.request({
-                           url: 'http://127.0.0.1:8080/user/order/selectAllOrderByUserId',
+                           url: 'http://127.0.0.1:8000/user/order/selectAllOrderByUserId',
                            data:{
                                 userId: open_id
                            },
@@ -116,36 +134,117 @@ Page({
                            }
                          })
                     }, 2000);
-               } else if (this.data.selectedIndex == 1) {
+               } else if (this.data.selectedIndex == 1){
+                    var selectIndex = this.data.selectedIndex;
                     this.setData({
-                         orderTodo: null
+                         orderToPay: null
                     });
                     wx: setTimeout(function () {
-                         that.setData({
-                              orderTodo: [],
-                         });
+                         wx.request({
+                           url: 'http://127.0.0.1:8000/user/order/selectToPayOrderByUserIdAndSelectedIndex',
+                           data:{
+                                userId: open_id,
+                                selectedIndex: selectIndex
+                           },
+                           header: {
+                              'content-type': 'application/json' // 默认值
+                           },
+                           success(res){
+                              that.setData({
+                                   orderToPay: res.data.data,
+                              });
+                           }
+                         })
                     }, 2000);
                } else if (this.data.selectedIndex == 2) {
+                    var selectIndex = this.data.selectedIndex;
+                    this.setData({
+                         orderToDo: null
+                    });
+                    wx: setTimeout(function () {
+                         wx.request({
+                           url: 'http://127.0.0.1:8000/user/order/selectToPayOrderByUserIdAndSelectedIndex',
+                           data:{
+                                userId: open_id,
+                                selectedIndex: selectIndex
+                           },
+                           header: {
+                              'content-type': 'application/json' // 默认值
+                           },
+                           success(res){
+                              that.setData({
+                                   orderToDo: res.data.data,
+                              });
+                           }
+                         })
+                    }, 2000);
+               } else if (this.data.selectedIndex == 3) {
+                    var selectIndex = this.data.selectedIndex;
                     this.setData({
                          orderDone: null
                     });
                     wx: setTimeout(function () {
-                         that.setData({
-                              orderDone: [],
-                         });
+                         wx.request({
+                           url: 'http://127.0.0.1:8000/user/order/selectToPayOrderByUserIdAndSelectedIndex',
+                           data:{
+                              userId: open_id,
+                              selectedIndex: selectIndex
+                           },
+                           header: {
+                              'content-type': 'application/json' // 默认值
+                           },
+                           success(res){
+                              that.setData({
+                                   orderDone: res.data.data,
+                              });
+                           }
+                         })
                     }, 2000);
-               } else if (this.data.selectedIndex == 3) {
+               }else{
+                    var selectIndex = this.data.selectedIndex;
                     this.setData({
                          orderCancel: null
                     });
                     wx: setTimeout(function () {
-                         that.setData({
-                              orderCancel: [],
-                         });
+                         wx.request({
+                           url: 'http://127.0.0.1:8000/user/order/selectToPayOrderByUserIdAndSelectedIndex',
+                           data:{
+                              userId: open_id,
+                              selectedIndex: selectIndex
+                           },
+                           header: {
+                              'content-type': 'application/json' // 默认值
+                           },
+                           success(res){
+                              that.setData({
+                                   orderCancel: res.data.data,
+                              });
+                           }
+                         })
                     }, 2000);
                }
-          }
+     }
      },
+
+     orderDetail: function(event){
+          var orderStatus = event.currentTarget.dataset.orderstatus;
+          var orderId = event.currentTarget.dataset.orderid;
+          var hotelName = event.currentTarget.dataset.hotelname;
+          var roomNumber = event.currentTarget.dataset.roomnumber;
+          var roomName = event.currentTarget.dataset.roomname;
+          var roomService = event.currentTarget.dataset.roomservice;
+          var startOfDate = event.currentTarget.dataset.startdate;
+          var endOfDate = event.currentTarget.dataset.enddate;
+          var orderPrice = event.currentTarget.dataset.orderprice;
+          wx.navigateTo({
+               // url: '../bookHotel/bookHotel?price=' + room.roomPrice + '&hotelName=' + this.data.hotelName + '&roomName=' + room.roomName + '&startDate=' + startDate + '&endDate=' + endDate + '&roomNumber=' + room.roomNumber + '&hotelId=' + this.data.hotelId + '&roomId=' + room.roomId,
+               url: '../orderDetail/orderDetail?orderId=' + orderId + '&orderStatus=' + orderStatus + '&hotelName=' + hotelName + '&roomNumber=' + roomNumber + '&roomName=' + roomName + '&roomService=' + roomService + '&startOfDate=' + startOfDate + '&endOfDate=' + endOfDate + '&orderPrice=' + orderPrice,
+          })
+     },
+
+     // tapName: function(event) {
+     //      console.log("获取参数hi:",event.currentTarget.dataset.hi)
+     //    },
 
      /**
       * 搜索订单

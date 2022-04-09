@@ -14,53 +14,66 @@
                <!-- <navigator wx:for='{{orderList}}' url='../purchase_detail/purchase_detail?id={{item.id}}&state={{item.billState}}&json={{item.jsonData}}&index={{index}}&moduleIndex={{currentIndex}}' class='module_item'>
                     
                </navigator> -->
-               <view class="order">
+               <view class="order" wx:for='{{orderList}}'>
                     <view class="content_">
                          <view class="title">
                               <image src="../../res/images/酒店.png" style="height: 16px;width: 16px; padding-top: 8px;padding-right: 6px;padding-left: 10px;"></image>
-                              <view class="orderId"><text>{{hotelName}}</text></view>
-                              <view wx:if="{{orderStatus==0}}" class="orderStatus" style="padding-right: 5px;"><text>待支付</text></view>
-                              <view wx:elif="{{orderStatus==1}}" class="orderStatus" style="padding-right: 5px;"><text>待入住</text></view>
-                              <view wx:elif="{{orderStatus==2}}" class="orderStatus" style="padding-right: 5px;"><text>已入住</text></view>
-                              <view wx:elif="{{orderStatus==3}}" class="orderStatus" style="padding-right: 5px;"><text>已取消</text></view>
-                              <view wx:else class="orderStatus" style="padding-right: 5px;"><text>交易成功</text></view>
+                              <view class="orderId"><text>{{item.hotelName}}</text></view>
+                              <view wx:if="{{item.orderStatus==0}}" class="orderStatus" style="padding-right: 5px;"><text>待支付</text></view>
+                              <view wx:elif="{{item.orderStatus==1}}" class="orderStatus" style="padding-right: 5px;"><text>待确认</text></view>
+                              <view wx:elif="{{item.orderStatus==2}}" class="orderStatus" style="padding-right: 5px;"><text>待入住</text></view>
+                              <view wx:elif="{{item.orderStatus==3}}" class="orderStatus" style="padding-right: 5px;"><text>已入住</text></view>
+                              <view wx:else class="orderStatus" style="padding-right: 5px;"><text>已取消</text></view>
                          </view>
                          <view class="card">
                               <view class="card-img">
-                                   <image src="{{roomImgUrl}}"></image>
+                                   <image src="{{item.roomImgUrl}}"></image>
                               </view>
                               <view class="card-text">
                                    <view class="card-text_">
-                                        <text>{{orderRoomNumber}}间，{{roomName}}，{{roomService}}</text>
-                                        <text>{{startOfDate}} - {{endOfDate}}</text>
-                                        <text>总价：¥{{orderPrice}}</text>
+                                        <text>{{item.orderRoomNumber}}间，{{item.roomName}}，{{item.roomService}}</text>
+                                        <text>{{item.startOfDate}} - {{item.endOfDate}}</text>
+                                        <text>总价：¥{{item.orderPrice}}</text>
                                         <!-- <view>
                                              <view>￥98</view>
                                         </view> -->
                                    </view>
-                                   <view class="card-button" wx:if="{{orderStatus==0}}">
-                                        <view>支付</view>
+                                   <view class="card-button" wx:if="{{item.orderStatus==0}}">
+                                        <view bindtap="orderDetail" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
+                                             data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
+                                             data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>
                                         <view>取消订单</view>
                                         <view>修改订单</view>
                                    </view>
-                                   <view class="card-button" wx:elif="{{orderStatus==1}}">
+                                   <view class="card-button" wx:elif="{{item.orderStatus==1}}">
                                         <view>取消订单</view>
-                                        <view>订单详情</view>
+                                        <view bindtap="orderDetail" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
+                                             data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
+                                             data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>
+                                        <!-- <view id="tapTest" data-hi="Weixin" bindtap="tapName"> Click me! </view> -->
                                         <view>修改订单</view>
                                    </view>
-                                   <view class="card-button" wx:elif="{{orderStatus==2}}">
-                                        <view>订单详情</view>
-                                        <view>再次预订</view>
+                                   <!-- 待入住 -->
+                                   <view class="card-button" wx:elif="{{item.orderStatus==2}}">
+                                        <view>取消订单</view>
+                                        <view bindtap="orderDetail" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
+                                             data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
+                                             data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>
+                                        <view>修改订单</view>
                                    </view>
-                                   <view class="card-button" wx:elif="{{orderStatus==3}}">
-                                        <view>删除</view>
-                                        <view>订单详情</view>
+                                   <view class="card-button" wx:elif="{{item.orderStatus==3}}">
+                                        <view>评价</view>
+                                        <view bindtap="orderDetail" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
+                                             data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
+                                             data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>
                                         <view>再次预订</view>
                                    </view>
                                    <view class="card-button" wx:else>
                                         <view>删除</view>
-                                        <view>评价</view>
                                         <view>再次预订</view>
+                                        <view bindtap="orderDetail" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
+                                             data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
+                                             data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>
                                    </view>
                               </view>
                          </view>

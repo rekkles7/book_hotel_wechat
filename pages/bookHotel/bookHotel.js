@@ -10,6 +10,12 @@ var num;
 var plusStatus;
 var time;
 var orderPrice;
+var open_id;
+var hotelId;
+var roomId;
+var orderUserName;
+var orderUserTelephone;
+var orderUserPs;
 Page({
 
      /**
@@ -18,17 +24,80 @@ Page({
      data: {
           isDiscount: false,
           roomPrice,
+          open_id,
           hotelName,
           roomName,
           startDate,
           endDate,
+          roomId,
           num,
           roomNumber,
           discount: '不选择优惠',
           minusStatus: 'disabled',
           plusStatus,
           orderPrice,
+          orderUserName,
+          orderUserTelephone,
+          orderUserPs,
           time: '13:00'
+     },
+     orderUserNameInput: function(e){
+          this.setData({
+               orderUserName: e.detail.value
+          })
+          console.log("入住人为："+this.data.orderUserName)
+     },
+     orderUserTelephoneInput: function(e){
+          this.setData({
+               orderUserTelephone: e.detail.value
+          })
+          console.log("电话为"+this.data.orderUserTelephone)
+     },
+     orderUserPsInput: function(e){
+          this.setData({
+               orderUserPs: e.detail.value
+          })
+          console.log("备注信息为"+this.data.orderUserPs)
+     },
+     createOrder: function(){
+          wx.request({
+            url: 'http://127.0.0.1:8000/user/order/saveOrder',
+            method: 'post',
+            data:{
+                 openId: open_id,
+                 startOfDate: startDate,
+                 endOfDate: endDate,
+                 orderPrice: orderPrice,
+                 hotelId: hotelId,
+                 roomId: roomId,
+                 orderUserName: this.data.orderUserName,
+                 orderUserTelephone: this.data.orderUserTelephone,
+                 orderUserPs: this.data.orderUserPs,
+                 orderRoomNumber: num
+            },
+            header:{
+                 "Content-Type":"application/x-www-form-urlencoded"
+            },
+            success: function(res){
+               wx.showToast({
+                    title: "成功", // 提示的内容
+                    icon: "success", // 图标，默认success
+                    image: "", // 自定义图标的本地路径，image 的优先级高于 icon
+                    duration: 3000, // 提示的延迟时间，默认1500
+                    mask: false, // 是否显示透明蒙层，防止触摸穿透
+                    success: function () {
+                         setTimeout(function(){
+                              wx.switchTab({
+                                url: '../minePage/minePage',
+                              })
+                         },2000)
+                    },
+                    fail: function () {
+                        console.log("接口调用失败的回调函数");
+                    }
+                })                
+            }
+          })
      },
      bindMinus: function() {  
           var num = this.data.num;
@@ -85,14 +154,17 @@ Page({
       */
      onLoad: function (options) {
           console.log(options);
+          hotelId = options.hotelId;
           roomPrice = options.price;
           hotelName = options.hotelName;
           roomName = options.roomName;
           startDate = options.startDate;
           endDate = options.endDate;
           roomNumber = options.roomNumber;
+          open_id = wx.getStorageSync('open_id')
           num = 1;
           orderPrice = options.price;
+          roomId = options.roomId;
           if(roomNumber==1){
                this.setData({
                    plusStatus: 'disabled' 
@@ -110,7 +182,10 @@ Page({
                endDate: endDate,
                roomNumber: roomNumber,
                num: 1,
-               orderPrice: orderPrice
+               orderPrice: orderPrice,
+               hotelId: hotelId,
+               open_id: open_id,
+               roomId: roomId
           });
      },
 

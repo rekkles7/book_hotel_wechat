@@ -1,0 +1,43 @@
+<!--pages/payOrder/payOrder.wxml-->
+<view class='bookMsg'>
+  <view style="font-size: 12px;">下单成功，支付剩余时间30:00</view>
+  <view style="font-size: 30px;color: #fd7a33;">¥{{orderPrice}}.00</view>
+  <view style='font-size: 12px;display: inline; margin-top: 10px;'>{{roomName}}</view>
+  <view style="font-size: 12px;margin-top: 10px;">{{startOfDate}} 入住</view>
+</view>
+<view style="width: 37%;display: inline-block;margin-right: 7%;margin-left: 10%;margin-top: 4%;margin-bottom: 10%;">
+  <button style="background-color: #fd7a33;font-size: 17px;color: white;">
+    查看订单
+  </button>
+</view>
+<view style="width: 37%;display: inline-block;">
+  <button style="background-color: #fd7a33;font-size: 17px;color: white;">
+    返回首页
+  </button>
+</view>
+<view class='payWay'>
+  <view class="page-body">
+  <view class="page-section">
+    <view class="page-section-title">请选择您的支付方式：</view>
+    <radio-group>
+      <label class="radio" style="display: block;margin-bottom: 10px;margin-top: 10px;">
+      <image src="../../res/images/wxpay.png" style="height: 22px;width: 22px;vertical-align: middle;"></image>
+      微信支付
+      <radio value="r1" checked="true" style="float: right;"/>
+    </label>
+    <label class="radio">
+      <image src="../../res/images/alipay.png" style="height: 22px;width: 22px;vertical-align: middle;"></image>
+      支付宝支付<radio value="r2" style="float: right;"/>
+    </label>
+    </radio-group>
+  </view>
+</view>
+</view>
+
+<view class='payItem'>
+     <view class='priceItem'>
+          <text>应付：</text>
+          <text>¥{{orderPrice}}.00</text>
+     </view>
+     <view class='payBtn' bindtap="toPayOrder">确认支付</view>
+</view>

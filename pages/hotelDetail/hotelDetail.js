@@ -119,7 +119,7 @@ Page({
                });
           }
           wx.request({
-            url: 'http://127.0.0.1:8080/user/room/selectRoomByHotelId',
+            url: 'http://127.0.0.1:8000/user/room/selectRoomByHotelId',
             data:{
                  hotelId: hotelId,
                  startOfDate: startDate,
@@ -140,10 +140,20 @@ Page({
      bookRoom: function (e) {
           var index = e.currentTarget.dataset.index;
           var room = this.data.roomArray[index];
-          console.log(room)
-          wx.navigateTo({
-               url: '../bookHotel/bookHotel?price=' + room.roomPrice + '&hotelName=' + this.data.hotelName + '&roomName=' + room.roomName + '&startDate=' + startDate + '&endDate=' + endDate + '&roomNumber=' + room.roomNumber,
-          })
+          var open_id = wx.getStorageSync('open_id');
+          if(open_id == null || open_id == undefined || open_id == ""){
+               wx.showToast({
+                    title: "请先登录", // 提示的内容
+                    icon: "error", // 图标，默认success
+                    image: "", // 自定义图标的本地路径，image 的优先级高于 icon
+                    duration: 3000, // 提示的延迟时间，默认1500
+                    mask: false, // 是否显示透明蒙层，防止触摸穿透
+                })
+          }else{
+               wx.navigateTo({
+                    url: '../bookHotel/bookHotel?price=' + room.roomPrice + '&hotelName=' + this.data.hotelName + '&roomName=' + room.roomName + '&startDate=' + startDate + '&endDate=' + endDate + '&roomNumber=' + room.roomNumber + '&hotelId=' + this.data.hotelId + '&roomId=' + room.roomId,
+               })
+          }
      },
 
      startDateChange: function (e) {
@@ -163,7 +173,7 @@ Page({
 
           this.setSearchDate();
           wx.request({
-               url: 'http://127.0.0.1:8080/user/room/selectRoomByHotelId',
+               url: 'http://127.0.0.1:8000/user/room/selectRoomByHotelId',
                data:{
                     hotelId: this.data.hotelId,
                     startOfDate: startDate,
@@ -190,7 +200,7 @@ Page({
           endWeek = new Date(endYear, endMonth, endDay).getDay();
           this.setSearchDate();
           wx.request({
-               url: 'http://127.0.0.1:8080/user/room/selectRoomByHotelId',
+               url: 'http://127.0.0.1:8000/user/room/selectRoomByHotelId',
                data:{
                     hotelId: this.data.hotelId,
                     startOfDate: startDate,

@@ -154,8 +154,22 @@ Page {
      padding: 8rpx 32rpx;
 }
 
+.bookBtnFull, .bookBtnHover {
+     position: absolute;
+     right: 16rpx;
+     bottom: 16rpx;
+     border-radius: 8rpx;
+     color: white;
+     font-size: 26rpx;
+     padding: 8rpx 32rpx;
+}
+
 .bookBtn {
      background: #fe7e38;
+}
+
+.bookBtnFull{
+     background:gainsboro;
 }
 
 .bookBtnHover {
