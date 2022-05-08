@@ -6,7 +6,7 @@
 
      <view class='introduce'>
           <view class='hotelName'>{{hotelName}}</view>
-          <view class='text'>酒店评价</view>
+          <view class='text' bindtap="toCommentList">酒店评价</view>
      </view>
 </view>
 

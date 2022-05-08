@@ -10,7 +10,10 @@
     "pages/bookHotel/bookHotel",
     "pages/payOrder",
     "pages/payOrder/payOrder",
-    "pages/orderDetail/orderDetail"
+    "pages/orderDetail/orderDetail",
+    "pages/updateOrder/updateOrder",
+    "pages/commentDetail/commentDetail",
+    "pages/comment/comment"
   ],
   "window": {
     "backgroundTextStyle": "light",

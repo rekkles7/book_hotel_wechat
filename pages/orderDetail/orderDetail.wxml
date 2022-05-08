@@ -30,7 +30,7 @@
 </view>
 <view class="bookMsg" wx:if="{{orderStatus==0}}">
   <view style="font-weight: 800;">等待付款</view>
-  <view style="color: rgb(205,204,205);font-size: 13px;margin-top: 8px;">该订单需要在30:00前支付，超时将自动关闭</view>
+  <view style="color: rgb(205,204,205);font-size: 13px;margin-top: 8px;">该订单需要在{{mins}}:{{seconds}}内支付，超时将自动关闭</view>
   <view style="font-size: 14px;margin-top: 10px;display: inline;">{{startOfDate}} 12点前可以免费取消</view>
   <view style="margin-top: 10px;">
     <view style="width: 30%;display: inline-block;">

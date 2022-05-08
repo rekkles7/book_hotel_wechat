@@ -43,7 +43,9 @@
                                              data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
                                              data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>
                                         <view>取消订单</view>
-                                        <view>修改订单</view>
+                                        <view bindtap="updateOrder" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
+                                             data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
+                                             data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">修改订单</view>
                                    </view>
                                    <view class="card-button" wx:elif="{{item.orderStatus==1}}">
                                         <view>取消订单</view>
@@ -51,7 +53,9 @@
                                              data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
                                              data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>
                                         <!-- <view id="tapTest" data-hi="Weixin" bindtap="tapName"> Click me! </view> -->
-                                        <view>修改订单</view>
+                                        <view bindtap="updateOrder" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
+                                             data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
+                                             data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">修改订单</view>
                                    </view>
                                    <!-- 待入住 -->
                                    <view class="card-button" wx:elif="{{item.orderStatus==2}}">
@@ -59,10 +63,12 @@
                                         <view bindtap="orderDetail" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
                                              data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
                                              data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>
-                                        <view>修改订单</view>
+                                             <view bindtap="updateOrder" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
+                                             data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
+                                             data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">修改订单</view>
                                    </view>
                                    <view class="card-button" wx:elif="{{item.orderStatus==3}}">
-                                        <view>评价</view>
+                                        <view bindtap="toCommentPage" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}">评价</view>
                                         <view bindtap="orderDetail" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
                                              data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
                                              data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>

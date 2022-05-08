@@ -1,0 +1,55 @@
+<!--pages/updateOrder/updateOrder.wxml-->
+<import src='template.wxml' />
+
+<scroll-view class='bookScroll' scroll-y>
+     <view class='bookBody'>
+          <view class='bookMsg'>
+               <view>{{hotelName}}</view>
+               <view style='margin-top:10rpx;'>房型：{{roomName}}</view>
+          </view>
+
+          <template is='settingItem' data="{{caption:'入住/离店',value:startOfDate+'/'+endOfDate,needIcon:false,isInput:false}}" />
+          <!-- <template is='roomSettingItem' data="{{caption:'房间数量 ',num:'1'}}" /> -->
+          <view style='width:100%;height:24rpx;'></view>
+          <view class='settingItem'>
+               <text class='caption'>入住人</text>
+               <input bindinput='orderUserNameInput' value='{{orderUserName}}' style='flex:1' type="text" placeholder="请输入入住人姓名"></input>
+          </view>
+          <view class='settingItem'>
+               <text class='caption'>电话号码</text>
+               <input bindinput='orderUserTelephoneInput' value='{{orderUserTelephone}}' style='flex:1' type="number" placeholder="请输入预留的电话"></input>
+          </view>
+          <!-- <view class='settingItem'>
+               <text class='caption'>手机号码</text>
+               <clearInput style='flex:1' inputHint="请输入手机号码" input-class='value' icon-class='viewHidden' inputType="number" ></clearInput>
+          </view> -->
+          <view class='settingItem'>
+               <text class='caption'>到店时间</text>
+               <view class="section">
+                    <!-- <view class="section__title">时间选择器</view> -->
+                    <picker mode="time" value="{{time}}" start="13:00" end="23:00" bindchange="bindTimeChange">
+                         <view class="picker">
+                               {{time}}
+                         </view>
+                    </picker>
+               </view>
+          </view>
+          <view style='width:100%;height:24rpx;'></view>
+
+
+          <view class='settingItem'>
+               <text class='caption'>备注</text>
+               <input bindinput='orderUserPsInput' value='{{orderUserPs}}' style='flex:1' type="text" placeholder="请补充你的请他需求"></input>
+          </view>
+          <view style='width:100%;height:100rpx;'></view>
+     </view>
+</scroll-view>
+
+<view class='payItem'>
+     <view class='priceItem'>
+          <text>订单总价：</text>
+          <text>¥{{orderPrice}}</text>
+          <text wx:if='{{isDiscount}}' class='payMsg'>(已优惠{{discount}}元)</text>
+     </view>
+     <view class='payBtn' bindtap="createOrder">提交修改</view>
+</view>

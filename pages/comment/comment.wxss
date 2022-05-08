@@ -1,0 +1,130 @@
+/* pages/comment/comment.wxss */
+.contains{
+  color:#ccc;
+  font-size: 34rpx;
+  margin: 15rpx;
+}
+.release{
+  color: #fff;
+  background: #f95807;
+  margin: 0 10%;
+  width: 80%;
+  height: 80rpx;
+  line-height: 80rpx;
+  position: fixed;
+  bottom: 10rpx;
+  
+}
+
+.score{
+  height: 150rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.score-left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 34rpx;
+  justify-content: space-between;
+}
+.score-left image{
+  height: 100rpx;
+  width: 100rpx;
+}
+.score-right{
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 77%;
+}
+.score-right image{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 12rpx;
+}
+.score_text{
+  width: 150rpx;
+  text-align: center;
+  color: #b0b0b0;
+}
+
+.textarea{
+  position: relative;
+  margin-top: 20rpx;
+  height: 540rpx;
+  width: 100%;
+  border-bottom: 1rpx #e6e6e6 solid;
+}
+.textarea textarea{
+  height: 200rpx;
+  width: 100%;
+  border:0.1rpx solid #efefef;
+  border-radius: 15rpx;
+  color: black;
+  padding-left: 20rpx;
+}
+.textarea-text{
+  color: #ccc;
+  font-size: 34rpx;
+}
+.textarea .title{
+  margin:10rpx 0;
+}
+.picture{
+
+  z-index: 99;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.picture_item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 230rpx;
+  width: 180rpx;
+  border: 1rpx #e6e6e6 dashed;
+}
+.picture_item image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.picture_upload{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 180rpx;
+  width: 180rpx;
+  margin: 5rpx;
+ 
+}
+.picture_upload image{
+  height: 180rpx;
+  width: 180rpx;
+}
+.picture_delete{
+  width: 180rpx;
+  height: 50rpx;
+  position: absolute;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  bottom:-50rpx;
+  right:0rpx;
+  border: 1rpx #e6e6e6 solid;
+  border-top: none;
+ 
+}
+.picture_delete image{
+  width: 50rpx;
+  height: 50rpx;
+}
+

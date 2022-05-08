@@ -107,7 +107,6 @@ Page({
           this.initEndDate();
           this.setSearchDate();
 
-          console.log(options);
           var hotelName = options.name;
           var address = options.address;
           var distance = options.distance;
@@ -134,6 +133,13 @@ Page({
                     roomArray: res.data.data
                })
              }
+          })
+     },
+
+     toCommentList: function(){
+          var hotelId = this.data.hotelId;
+          wx.navigateTo({
+               url: '../commentDetail/commentDetail?hotelId=' + hotelId
           })
      },
 

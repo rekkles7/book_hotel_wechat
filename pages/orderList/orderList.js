@@ -241,6 +241,28 @@ Page({
                url: '../orderDetail/orderDetail?orderId=' + orderId + '&orderStatus=' + orderStatus + '&hotelName=' + hotelName + '&roomNumber=' + roomNumber + '&roomName=' + roomName + '&roomService=' + roomService + '&startOfDate=' + startOfDate + '&endOfDate=' + endOfDate + '&orderPrice=' + orderPrice,
           })
      },
+     toCommentPage:function(event){
+          var orderId = event.currentTarget.dataset.orderid;
+          var hotelName = event.currentTarget.dataset.hotelname;
+          wx.navigateTo({
+            url: '../comment/comment?orderId=' + orderId + '&hotelName=' + hotelName,
+          })
+     },
+     updateOrder: function(event){
+          var orderStatus = event.currentTarget.dataset.orderstatus;
+          var orderId = event.currentTarget.dataset.orderid;
+          var hotelName = event.currentTarget.dataset.hotelname;
+          var roomNumber = event.currentTarget.dataset.roomnumber;
+          var roomName = event.currentTarget.dataset.roomname;
+          var roomService = event.currentTarget.dataset.roomservice;
+          var startOfDate = event.currentTarget.dataset.startdate;
+          var endOfDate = event.currentTarget.dataset.enddate;
+          var orderPrice = event.currentTarget.dataset.orderprice;
+          wx.navigateTo({
+               // url: '../bookHotel/bookHotel?price=' + room.roomPrice + '&hotelName=' + this.data.hotelName + '&roomName=' + room.roomName + '&startDate=' + startDate + '&endDate=' + endDate + '&roomNumber=' + room.roomNumber + '&hotelId=' + this.data.hotelId + '&roomId=' + room.roomId,
+               url: '../updateOrder/updateOrder?orderId=' + orderId + '&orderStatus=' + orderStatus + '&hotelName=' + hotelName + '&roomNumber=' + roomNumber + '&roomName=' + roomName + '&roomService=' + roomService + '&startOfDate=' + startOfDate + '&endOfDate=' + endOfDate + '&orderPrice=' + orderPrice,
+          })
+     },
 
      // tapName: function(event) {
      //      console.log("获取参数hi:",event.currentTarget.dataset.hi)

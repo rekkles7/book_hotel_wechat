@@ -1,0 +1,35 @@
+/* pages/commentDetail/commentDetail.wxss */
+.bookMsg {
+  margin: 24rpx;
+  display: flex;
+  flex-direction: column;
+  padding: 36rpx;
+  border-radius: 20rpx;
+  box-shadow: 0rpx 6rpx 20rpx #ccc;
+  background: white;
+}
+
+/* 圆形进度条 */
+ 
+.circleBar {
+  width: 30px;
+  height: 30px;
+}
+ 
+.cir {
+  background-color: #fff;
+  border-radius: 100%;
+}
+ 
+.top {
+  text-align: center;
+}
+ 
+.centerWord {
+  width: 100%;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  text-align: center;
+  color: #3686ff;
+}

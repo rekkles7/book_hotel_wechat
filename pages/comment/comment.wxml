@@ -1,0 +1,41 @@
+<!--pages/comment/comment.wxml-->
+<view class='contains'>
+<form bindsubmit="onSubmit">
+  <view class='textarea'>
+    <textarea placeholder-class='textarea-text' placeholder='从多个角度评价酒店，可以帮助更多的人' name="text"></textarea>
+    <view class='title'>添加图片:(最多四张)</view>
+    <view class='picture'>
+       <view class='picture' wx:if="{{!is_upload}}" >
+        <view class='picture_item' bindtap="chooseImage">
+          <image src='{{camera_pic}}' mode="widthFix" />
+        </view>
+      </view>
+      <view  class='picture' wx:if="{{upload_pic.length>0}}">
+        <view class='picture_upload' bindtap="" wx:for-items="{{upload_pic}}" wx:for-item="pic" wx:key="index">
+          <image src='{{pic}}'  />
+          <view class='picture_delete' bindtap='deletePic' data-pic_index='{{index}}'>
+            <image src='{{delete_ico}}'  />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='score'>
+    <view class='score-left'>
+      <view>
+        <text>交易评分:</text>
+      </view>
+    </view>
+    <view class='score-right'>
+      <view wx:for-items="{{score_img_arr}}" wx:for-item="img" wx:key="index">
+        <image bindtap='onScore' data-score='{{index+1}}'   src="{{img}}" />
+      </view>
+      <view class='score_text'>
+        <text>{{score_text}}</text>
+      </view>
+    </view>
+  </view>
+    <button class='release' form-type='submit'>发布</button>
+  </form>
+</view>
+
