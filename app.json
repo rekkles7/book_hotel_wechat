@@ -13,7 +13,8 @@
     "pages/orderDetail/orderDetail",
     "pages/updateOrder/updateOrder",
     "pages/commentDetail/commentDetail",
-    "pages/comment/comment"
+    "pages/comment/comment",
+    "pages/cancelOrder/cancelOrder"
   ],
   "window": {
     "backgroundTextStyle": "light",

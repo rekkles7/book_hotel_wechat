@@ -161,3 +161,14 @@ Page {
 .stepper .disabled{  
   color: #ccc;  
 }  
+
+.createBtn {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  width: 250rpx;
+  background: #ee6715;
+}

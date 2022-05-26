@@ -42,13 +42,13 @@
                                         <view bindtap="orderDetail" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
                                              data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
                                              data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>
-                                        <view>取消订单</view>
+                                        <view bindtap="cancelOrder" data-orderid="{{item.orderId}}">取消订单</view>
                                         <view bindtap="updateOrder" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
                                              data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
                                              data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">修改订单</view>
                                    </view>
                                    <view class="card-button" wx:elif="{{item.orderStatus==1}}">
-                                        <view>取消订单</view>
+                                        <view bindtap="cancelOrder" data-orderid="{{item.orderId}}" data-orderprice="{{item.orderPrice}}">取消订单</view>
                                         <view bindtap="orderDetail" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
                                              data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
                                              data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>
@@ -59,7 +59,7 @@
                                    </view>
                                    <!-- 待入住 -->
                                    <view class="card-button" wx:elif="{{item.orderStatus==2}}">
-                                        <view>取消订单</view>
+                                        <view bindtap="cancelOrder" data-orderid="{{item.orderId}}" data-orderprice="{{item.orderPrice}}">取消订单</view>
                                         <view bindtap="orderDetail" data-orderstatus="{{item.orderStatus}}" data-orderid="{{item.orderId}}" data-hotelname="{{item.hotelName}}"
                                              data-roomnumber="{{item.orderRoomNumber}}" data-roomname="{{item.roomName}}" data-roomservice="{{item.roomService}}" data-startdate="{{item.startOfDate}}"
                                              data-enddate="{{item.endOfDate}}" data-orderprice="{{item.orderPrice}}">订单详情</view>

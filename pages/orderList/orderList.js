@@ -248,6 +248,26 @@ Page({
             url: '../comment/comment?orderId=' + orderId + '&hotelName=' + hotelName,
           })
      },
+     cancelOrder: function(event){
+          var orderId = event.currentTarget.dataset.orderid;
+          var orderPrice = event.currentTarget.dataset.orderprice;
+          var serviceCharge;
+          var refund;
+          wx.request({
+            url: 'http://127.0.0.1:8000/user/order/calculateServiceCharge',
+            data: {
+                 orderId: orderId
+            },
+            success(res){
+                 var rate = res.data.data
+                 serviceCharge = orderPrice * rate;
+                 refund = orderPrice - serviceCharge;
+                 wx.navigateTo({
+                    url: '../cancelOrder/cancelOrder?orderId=' + orderId + '&orderPrice=' + orderPrice + '&refund=' + refund + '&serviceCharge=' + serviceCharge,
+               })
+            }
+          })
+     },
      updateOrder: function(event){
           var orderStatus = event.currentTarget.dataset.orderstatus;
           var orderId = event.currentTarget.dataset.orderid;

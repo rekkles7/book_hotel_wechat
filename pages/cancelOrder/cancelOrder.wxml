@@ -1,0 +1,40 @@
+<!--pages/cancelOrder/cancelOrder.wxml-->
+<view class="bookMsg">
+  <view>
+    <text>退款金额</text>
+    <text style="float: right;color: coral;">¥{{refund}}.00</text>
+  </view>
+</view>
+
+<view class="bookMsg">
+  <view>
+    <text>退款明细</text>
+  </view>
+  <view style="margin-top: 10px;">
+    <text>房费</text>
+    <text style="float: right;color: coral;">¥{{orderPrice}}.00</text>
+  </view>
+  <view style="margin-top: 10px;">
+    <text>手续费（按照<text style="color: coral;">{{rate}}%</text>收取退单手续费）</text>
+    <text style="float: right;color: coral;">¥{{serviceCharge}}.00</text>
+  </view>
+</view>
+
+<view class="bookMsg">
+  <view>
+    <text>退回方式</text>
+  </view>
+  <view style="margin-top: 10px;">
+    <text>退回原支付方</text>
+    <text style="float: right;color: coral;">预计5-7个工作日到账</text>
+  </view>
+</view>
+
+<view style="margin-top: 30px;">
+  <view style="width: 40%;display: inline-block;margin-left: 32px;margin-right: 14px;">
+      <button style="background-color: #fd7a33;font-size: 14px;color: white;">暂不取消</button>
+    </view>
+    <view style="width: 40%;display: inline-block;">
+      <button style="background-color: #fd7a33;font-size: 14px;color: white;" bindtap="cancel">确定取消</button>
+    </view>
+</view>

@@ -3,7 +3,7 @@
   <view style="font-weight: 800;">预定成功，期待您的入住</view>
   <view style="color: rgb(205,204,205);font-size: 13px;margin-top: 8px;">订单已支付</view>
   <view style="margin-top: 10px;">
-    <view style="font-size: 14px;margin-top: 10px;display: inline;">今天12点前可以免费取消</view>
+    <view style="font-size: 14px;margin-top: 10px;display: inline;">{{startOfDate}} 12点前可以免费取消</view>
     <view style="font-size: 12px;display: inline;float: right;color: rgb(240, 127, 124);" bindtap="cancelRules">取消规则</view>
     <!--屏幕背景变暗的背景  -->
   <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>

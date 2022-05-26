@@ -21,7 +21,7 @@ var endMonth;
 var endWeek;
 var endOfEndDate = '2025-12-31';
 
-var dayCount = 1;
+var dayCount;
 
 function RoomBean() {
      var image;
@@ -48,7 +48,7 @@ Page({
           endDay: '',
           endMonth: '',
           endWeek: '',
-          dayCount: 1,
+          dayCount: '',
 
           hotelId: '',
           hotelName: '',
@@ -147,6 +147,7 @@ Page({
           var index = e.currentTarget.dataset.index;
           var room = this.data.roomArray[index];
           var open_id = wx.getStorageSync('open_id');
+          var dayCount = this.data.dayCount
           if(open_id == null || open_id == undefined || open_id == ""){
                wx.showToast({
                     title: "请先登录", // 提示的内容
@@ -156,8 +157,9 @@ Page({
                     mask: false, // 是否显示透明蒙层，防止触摸穿透
                 })
           }else{
+               var price = room.roomPrice * dayCount
                wx.navigateTo({
-                    url: '../bookHotel/bookHotel?price=' + room.roomPrice + '&hotelName=' + this.data.hotelName + '&roomName=' + room.roomName + '&startDate=' + startDate + '&endDate=' + endDate + '&roomNumber=' + room.roomNumber + '&hotelId=' + this.data.hotelId + '&roomId=' + room.roomId,
+                    url: '../bookHotel/bookHotel?price=' + price + '&hotelName=' + this.data.hotelName + '&roomName=' + room.roomName + '&startDate=' + startDate + '&endDate=' + endDate + '&roomNumber=' + room.roomNumber + '&hotelId=' + this.data.hotelId + '&roomId=' + room.roomId + '&version=' + room.version,
                })
           }
      },

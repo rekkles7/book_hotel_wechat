@@ -1,0 +1,10 @@
+/* pages/cancelOrder/cancelOrder.wxss */
+.bookMsg {
+  margin: 24rpx;
+  display: flex;
+  flex-direction: column;
+  padding: 36rpx;
+  border-radius: 20rpx;
+  box-shadow: 0rpx 6rpx 20rpx #ccc;
+  background: white;
+}

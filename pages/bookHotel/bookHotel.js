@@ -10,12 +10,15 @@ var num;
 var plusStatus;
 var time;
 var orderPrice;
+var version;
 var open_id;
 var hotelId;
 var roomId;
 var orderUserName;
 var orderUserTelephone;
 var orderUserPs;
+let validate = null;
+import WxValidate from '../../utils/WxValidate.js'
 Page({
 
      /**
@@ -39,25 +42,31 @@ Page({
           orderUserName,
           orderUserTelephone,
           orderUserPs,
-          time: '13:00'
+          version,
+          time: '13:00',
+          form:{
+               orderUserName: '',
+               orderUserTelephone: '',
+               orderUserPs: ''
+          }
      },
      orderUserNameInput: function(e){
           this.setData({
-               orderUserName: e.detail.value
+               'form.orderUserName':e.detail.value
           })
-          console.log("入住人为："+this.data.orderUserName)
+          console.log("入住人为："+this.data.form.orderUserName)
      },
      orderUserTelephoneInput: function(e){
           this.setData({
-               orderUserTelephone: e.detail.value
+               'form.orderUserTelephone':e.detail.value
           })
-          console.log("电话为"+this.data.orderUserTelephone)
+          console.log("电话为"+this.data.form.orderUserTelephone)
      },
      orderUserPsInput: function(e){
           this.setData({
-               orderUserPs: e.detail.value
+               'form.orderUserPs':e.detail.value
           })
-          console.log("备注信息为"+this.data.orderUserPs)
+          console.log("备注信息为"+this.data.form.orderUserPs)
      },
      createOrder: function(){
           wx.request({
@@ -70,10 +79,11 @@ Page({
                  orderPrice: orderPrice,
                  hotelId: hotelId,
                  roomId: roomId,
-                 orderUserName: this.data.orderUserName,
-                 orderUserTelephone: this.data.orderUserTelephone,
-                 orderUserPs: this.data.orderUserPs,
-                 orderRoomNumber: num
+                 orderUserName: this.data.form.orderUserName,
+                 orderUserTelephone: this.data.form.orderUserTelephone,
+                 orderUserPs: this.data.form.orderUserPs,
+                 orderRoomNumber: this.data.num,
+                 version: version
             },
             header:{
                  "Content-Type":"application/x-www-form-urlencoded"
@@ -149,6 +159,51 @@ Page({
                num: num  
           });  
       } ,
+      initValidate(){
+           const rule={
+               orderUserName: {
+                     required: true,
+                     minlength: 2
+                },
+                orderUserTelephone: {
+                     required: true,
+                     tel: true
+                },
+                orderUserPs: {
+                     required: true
+                }
+           }
+           const message={
+               orderUserName: {
+                     required: '入住人不能为空',
+                     minlength: '请输入正确的姓名'
+                },
+                orderUserTelephone: {
+                    required: '手机号码不能为空',
+                    tel: '请填写正确的手机号码'
+                },
+                orderUserPs: {
+                    required: '备注信息不能为空，若无备注，请填写无'
+                }
+           }
+           this.WxValidate = new WxValidate(rule,message)
+      },
+      showModal(error){
+           wx.showModal({
+                content: error.msg,
+                showCancel: false,
+           })
+      },
+      formSubmit:function(e){
+           const params = e.detail.value
+           if(!this.WxValidate.checkForm(params)){
+                const error = this.WxValidate.errorList[0]
+                this.showModal(error)
+                return false
+           }else{
+                this.createOrder()
+           }
+      },
      /**
       * 生命周期函数--监听页面加载
       */
@@ -160,11 +215,13 @@ Page({
           roomName = options.roomName;
           startDate = options.startDate;
           endDate = options.endDate;
+          version = options.version;
           roomNumber = options.roomNumber;
           open_id = wx.getStorageSync('open_id')
           num = 1;
           orderPrice = options.price;
           roomId = options.roomId;
+          console.log(options.version)
           if(roomNumber==1){
                this.setData({
                    plusStatus: 'disabled' 
@@ -185,8 +242,10 @@ Page({
                orderPrice: orderPrice,
                hotelId: hotelId,
                open_id: open_id,
-               roomId: roomId
+               roomId: roomId,
+               version: version
           });
+          this.initValidate()
      },
 
      bindTimeChange: function(e) {

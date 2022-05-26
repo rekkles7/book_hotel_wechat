@@ -142,8 +142,15 @@ Page({
            urls: upload_img,
          },
          success: res => {
-           wx.hideLoading();
-           console.log(res);
+          wx.hideLoading();
+           if(res.data.status == 200){
+             
+           }else{
+                wx.showModal({
+                  content: res.data.msg,
+                  showCancel: false,
+            })
+           }
          }
        });
      }else{
